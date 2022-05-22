@@ -7,6 +7,7 @@
 body{
     min-height: 100%;
     font-family: "Poppins",Arial, Helvetica, sans-serif;
+    background-color: var(--background);
 }
 html{
     min-height: 100%;
@@ -14,7 +15,10 @@ html{
 }
 
 :root{
-    --primary: #EE5007;
+    --primary: #2c9b07;
+    --background: #F5F5F5;
+    --heading: #180A0A;
+    --text: #413F42;
 }
 
 
@@ -31,7 +35,12 @@ body::-webkit-scrollbar-thumb{
 li{
     list-style-type: none;
 }
-
+h1{
+    color: var(--heading);
+}
+p{
+    color: var(--text);
+}
 /* Navbar */
 nav{
     position: fixed;
@@ -50,7 +59,7 @@ nav{
 }
 nav .brand h1{
     font-size: 1.7rem;
-    color: #180A0A;
+    color: var(--heading);
 }
 nav .nav-links ul li{
     display: inline;
@@ -59,7 +68,7 @@ nav .nav-links ul li{
 
 nav .nav-links ul li a{
     font-size: 1.1rem;
-    color: #413F42;
+    color: var(--text);
     margin: 0 1vw;
 }
 
@@ -126,7 +135,7 @@ main{
 
 .changing-text ul li h2::after{
     content: "";
-    background-color: #FDFDFD;
+    background-color: var(--background);
     border-left: 3px solid var(--primary);
     position: absolute;
     height: 100%;
@@ -154,6 +163,7 @@ main{
     border-radius: 20px;
 }
 
+/* Orbit section */
 #home .social .orbiting {
     position: absolute;
     top: 10px;
@@ -170,9 +180,9 @@ main{
     height: 150px;
     text-align: center;
     font-size: 2rem;
-    animation: orbit 10s linear infinite;
+    animation: orbit 10s linear infinite; /*Orbit Animation*/
 }
-
+/* Orbit route */
 #home .social .orbiting .orbit-route{
     display: inline-block;
     width: 300px;
@@ -190,7 +200,7 @@ main{
     position: absolute;
     border-radius: 50%;
     padding: 5px 13px;
-    animation: orbiter 10s linear infinite;
+    animation: orbiter 10s linear infinite; /* Orbiter Animation*/
     background-color: var(--primary);
 }
 
@@ -214,6 +224,25 @@ main{
     right:-65px;
 }
 
+/* Orbiter Hover Animation */
+#home .social ul li:hover{
+    background-color: #78d15a;
+}
+#home .social ul li:nth-child(1):hover a{
+    color: #000;
+}
+
+#home .social ul li:nth-child(2):hover a{
+    color:#0077B5;
+}
+
+#home .social ul li:nth-child(3):hover a{
+    background: -webkit-linear-gradient(30deg,#9730ba,#eb4c48,#efb64e); 
+    background-clip : text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /* Orbit Hover */
 #home .social .orbiting:hover .orbiter{
     animation-play-state: paused;
@@ -225,12 +254,23 @@ main{
 
 /* About Section */
 #about{
-   padding: 7rem 70px;
+    padding: 7rem 70px;
+}
+
+/* Bio Section */
+#about .bio{
+    padding:20px 0;
+}
+
+#about .bio p{
+    text-align: justify;
+    font-size: 1.2rem;
 }
 
 
 /* MOBILE SCREEN MEDIA QUERIES */
 @media screen and (max-width:600px){
+    /* Navigation Mobile */
     nav{
         padding: 0 2rem;
     }
@@ -247,13 +287,15 @@ main{
 
         display: grid;
         justify-content: center;
+        align-items: flex-start;
         height: 0;
         width: 100%;
     }
 
     nav .nav-links ul li{
-        padding: 10% 0;
+        padding: 10px 0;
         font-size: 2rem;
+        font-weight: bolder;
     }
     
     nav .nav-links ul{
@@ -262,7 +304,7 @@ main{
         flex-wrap: nowrap;
         flex-direction: column;
     }
-    /* Hamburger Icon */
+    /* Hamburger Icon Mobile*/
     .button{
         width: 50%;
         height: 100%;
@@ -295,14 +337,14 @@ main{
     .active span:nth-child(3){
         transform: translateY(-7px) rotate(-45deg);
     }
-    /* Navbar Animation */
+    /* Navbar Animation Mobile*/
     .height-animation{
         padding: 20px 0;
         height: 50% !important;
         box-shadow: 0 20px 30px #5654546d;
     }
 
-    /* Home Section */
+    /* Home Section Mobile*/
     #home{
         height: 400px;
         grid-auto-flow: row;
@@ -316,7 +358,7 @@ main{
         height: 50%;
     }
 
-    /* Home Profile */
+    /* Home Profile Mobile*/
     #home .profile h1{
         font-size: 1.3rem;
     }
@@ -334,6 +376,38 @@ main{
     }
     .changing-text ul li h2::after {
         margin: 0 10px !important;
+    }
+
+    /* Orbiter Location Mobile */
+    #home .social ul li:nth-child(1) {
+        top: -60px;
+        left: 45px;
+    }
+
+    #home .social ul li:nth-child(2) {
+        top: 90px;
+        left: -60px;
+    }
+
+    #home .social ul li:nth-child(3) {
+        top: 100px;
+        right: -50px;
+    }
+
+    /* Orbit Route Mobile */
+    #home .social .orbiting .orbit-route {
+        width: 200px;
+        height: 200px;
+        top:-50px;
+        left: -25px;
+    }
+
+    /* Orbiter Mobile */
+    #home .social .orbiter {
+        top:-20px;
+        left: 15px;
+        width: 120px;
+        height: 140px;
     }
 }
 
