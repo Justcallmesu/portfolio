@@ -22,7 +22,6 @@ function removeClass(element) {
     if (navbarLinkActive) {
         const temp = navbarLinkActive?.getAttribute("href").split("#")[1];
         if (!(temp === element)) {
-            console.log("hello");
             navbarLinkActive.classList.remove("active");
         }
     }

@@ -68,14 +68,29 @@ nav .nav-links ul li{
 }
 
 nav .nav-links ul li a{
+    position: relative;
+    font-weight: bolder;
     font-size: 1.1rem;
     color: var(--text);
     margin: 0 1vw;
+    transition: 0.1s all;
 }
 
 nav .nav-links ul li a:hover {
-   color: var(--primary);
+    color: var(--primary);
 }
+
+/* Adaptability */
+.active::after{
+    content: "";
+    position: absolute;
+    background-color: var(--primary);
+    width: 50%;
+    bottom:0;
+    left: 15px;
+    height: 2px;
+}
+
 
 /* Content Container */
 main{
