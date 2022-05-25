@@ -6,9 +6,8 @@ function navbar() {
     navigation.classList.toggle("height-animation");
 }
 
-hamburger.addEventListener("click", navbar);
-
-navigation.addEventListener("click", navbar);
+hamburger?.addEventListener("click", navbar);
+navigation?.addEventListener("click", navbar);
 
 // Adaptability Navigation
 let navbarLinkActive;
@@ -50,7 +49,6 @@ document.addEventListener("scroll", function () {
     } else if (clientLocation > about.offsetTop - 100) {
         addClass(about);
     }
-
-
 })
 
+addClass(home);
