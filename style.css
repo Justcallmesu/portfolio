@@ -55,7 +55,7 @@ nav{
     justify-content: space-between;
     align-items: center;
     background-color: #FDFDFD;
-    box-shadow: 0 0.7vh 1vh #5654546d ;
+    box-shadow: 0 0.7vh 20px #5654546d ;
 }
 nav .brand h1{
     font-size: 1.7rem;
@@ -96,13 +96,17 @@ main{
     padding: 0 80px;
     height: 100vh;
 }
-/* Section Title */
-.heading{
+/* Heading style */
+.heading-section{
     display: inline-block;
     width: 9.5rem;
     font-size: 3rem;
     border-bottom: 3px solid var(--primary);
 }
+
+.heading-content{
+    font-size: 1.5rem;
+}    
 
 /* Home Section */
 #home{
@@ -218,6 +222,7 @@ main{
     padding: 5px 13px;
     animation: orbiter 10s linear infinite; /* Orbiter Animation*/
     background-color: var(--primary);
+    box-shadow: 2px 5px 1px 1px #5654546d;
 }
 
 #home .social ul li a{
@@ -282,8 +287,45 @@ main{
     text-align: justify;
     font-size: 1.2rem;
 }
+/* Skills Section */
+#about .details{
+    margin: 20px 0;
+    display:flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;    
+    
+    background-color: #cbc7cd;
+    box-shadow: 0 10px 10px #5654546d;
+    border-radius: 10px;
+    
+    width: 100%;
+    height: 300px;
+}
 
+/* Style for div inside .details*/
+#about .details > div{
+    position: absolute;
+    border-radius:10px;
+    
+    width: 100%;
+    height: 100%;
+}
 
+/* About Icon Style */
+#about .skills-icon{
+    width: 100%;
+}
+
+#about .skills-icon ul {
+    display: flex;
+}
+
+#about .skills-icon ul li img{
+    cursor: pointer;
+    display: inline;
+    width: 5rem;
+}
 /* MOBILE SCREEN MEDIA QUERIES */
 @media screen and (max-width:600px){
     /* Navigation Mobile */
@@ -378,6 +420,7 @@ main{
     #home .profile h1{
         font-size: 1.3rem;
     }
+
     #home .profile .border{
         width: 80%;
     }
