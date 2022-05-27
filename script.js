@@ -16,6 +16,8 @@ const navlinks = document.querySelectorAll("nav .nav-links ul li a");
 // Element Variable
 const home = document.getElementById("home");
 const about = document.getElementById("about");
+const projects = document.getElementById("projects")
+
 
 function removeClass(element) {
     if (navbarLinkActive) {
@@ -48,6 +50,8 @@ document.addEventListener("scroll", function () {
         addClass(home);
     } else if (clientLocation > about.offsetTop - 100) {
         addClass(about);
+    } else if (clientLocation > projects.offsetTop) {
+        addClass(projects);
     }
 })
 
@@ -57,6 +61,55 @@ addClass(home);
 // Skills Function
 
 const icons = document.getElementsByClassName("skills-icon")[0];
+const details = document.querySelectorAll(".skills .details > div");
+const container = document.querySelector(".skills .details");
+let activated;
+
+function deleteText() {
+    setTimeout(() => {
+        activated = document.getElementsByClassName("dis-flex")[0];
+        if (activated) {
+            document.querySelector(".details .heading-content").innerText = "";
+        } else {
+            document.querySelector(".details .heading-content").innerText = "Click icon below for detailed information";
+        }
+    }, 100);
+}
+
+function removeClassList(element) {
+    activated = document.getElementsByClassName("dis-flex")[0];
+    if (activated) {
+        setTimeout(() => {
+            activated.classList.remove("dis-flex");
+            classAdd(element);
+        }, 100);
+        activated.classList.remove("opacity");
+        return;
+    }
+    classAdd(element);
+}
+
+function notification() {
+    if (container.scrollHeight > container.clientHeight) {
+        document.querySelector(".skills .notification").classList.add("visibility");
+    } else {
+        document.querySelector(".skills .notification").classList.remove("visibility");
+    }
+}
+
+function classAdd(element) {
+    element.classList.add("dis-flex");
+    setTimeout(() => {
+        element.classList.add("opacity");
+    }, 100);
+    deleteText();
+    notification();
+}
+
 icons.addEventListener("click", (event) => {
-    console.log(event.target.getAttribute("skills"));
+    details.forEach((el) => {
+        if (event.target.getAttribute("skills") === el.classList[0]) {
+            removeClassList(el);
+        }
+    })
 })
