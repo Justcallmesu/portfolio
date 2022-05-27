@@ -275,7 +275,7 @@ main{
 
 /* About Section */
 #about{
-    padding: 7rem 0px;
+    padding: 7rem 0;
 }
 
 /* Bio Section */
@@ -295,8 +295,7 @@ main{
     justify-content: center;
     align-items: center;    
     
-    background-color: #cbc7cd;
-    box-shadow: 0 10px 10px #5654546d;
+    box-shadow: 0 0 10px #5654546d;
     border-radius: 10px;
     
     width: 100%;
@@ -305,27 +304,61 @@ main{
 
 /* Style for div inside .details*/
 #about .details > div{
+    background-color: var(--background);
     position: absolute;
+    display: none;
+    opacity: 0;
     border-radius:10px;
-    
     width: 100%;
     height: 100%;
 }
 
+/* Details Image */
+#about .details > div .image  {
+    padding: 20px 140px;
+}
+
+#about .details > div .image img{
+    width: 10rem;
+}
+
+/* Details Skills Details */
+#about .details > div .skills-details{
+    margin: 0 0 0 240px;
+    padding: 20px 0;
+}
+
+#about .details > div .skills-details ul li {
+    list-style-type: disc;
+    font-size: 1.4rem;
+}
+
 /* About Icon Style */
 #about .skills-icon{
+    box-shadow: 0 0 10px #5654546d;
+    margin: 20px 0;
+    border-radius: 20px;
+    background-color: var(--background);
     width: 100%;
 }
 
 #about .skills-icon ul {
     display: flex;
+    justify-content: space-evenly;
+    padding: 2rem;
 }
 
 #about .skills-icon ul li img{
     cursor: pointer;
-    display: inline;
-    width: 5rem;
+    display: inline-block;
+    width: 4rem;
+    transition: 0.2s;
 }
+
+#about .skills-icon ul li img:hover{
+    transform: scale(1.5);
+}
+
 /* MOBILE SCREEN MEDIA QUERIES */
 @media screen and (max-width:600px){
     /* Navigation Mobile */
@@ -562,6 +595,15 @@ main{
         top:-35px
     }
 }
+/* Utilities Style */
+.dis-flex{
+    display: flex;
+}
+
+.opacity{
+    opacity: 1;
+}
+
 /* FONT FACE */
 @font-face {
     font-family: "Poppins";

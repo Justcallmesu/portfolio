@@ -52,3 +52,11 @@ document.addEventListener("scroll", function () {
 })
 
 addClass(home);
+
+
+// Skills Function
+
+const icons = document.getElementsByClassName("skills-icon")[0];
+icons.addEventListener("click", (event) => {
+    console.log(event.target.getAttribute("skills"));
+})
