@@ -373,6 +373,12 @@ main{
     transform: scale(1.5);
 }
 
+/* Projects Section */
+#projects{
+    padding: 5rem 0;
+}
+
+
 /* MOBILE SCREEN MEDIA QUERIES */
 @media screen and (max-width:600px){
     /* Main Style Mobile */
@@ -394,7 +400,7 @@ main{
         top: 10%;
         left: 0;
         background-color: #FDFDFD;
-        transition: all ease-in 0.8s;
+        transition: all ease-in 0.3s;
 
         display: grid;
         justify-content: center;
@@ -448,6 +454,7 @@ main{
     .active span:nth-child(3){
         transform: translateY(-7px) rotate(-45deg);
     }
+
     /* Navbar Animation Mobile*/
     .height-animation{
         padding: 20px 0;

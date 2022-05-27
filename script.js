@@ -48,11 +48,14 @@ document.addEventListener("scroll", function () {
     const clientLocation = document.querySelector("html").scrollTop;
     if (clientLocation >= home.offsetTop && clientLocation <= about.offsetTop - 200) {
         addClass(home);
-    } else if (clientLocation > about.offsetTop - 100) {
+    } else if (clientLocation > about.offsetTop - 100 && clientLocation < projects.offsetTop - 300) {
         addClass(about);
-    } else if (clientLocation > projects.offsetTop) {
+    } else if (clientLocation > projects.offsetTop - 300) {
         addClass(projects);
     }
+
+    console.log(about.offsetTop);
+    console.log(projects.offsetTop);
 })
 
 addClass(home);
