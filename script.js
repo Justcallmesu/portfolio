@@ -1,27 +1,40 @@
 // Hamburger Icon
-const hamburger = document.querySelector(".button");
-const navigation = document.querySelector(".nav-links");
-function navbar() {
-    hamburger.classList.toggle("active");
-    navigation.classList.toggle("height-animation");
+const nav = {
+    hamburger: document.querySelector(".button"),
+    navigation: document.querySelector(".nav-links")
 }
 
-hamburger?.addEventListener("click", navbar);
-navigation?.addEventListener("click", navbar);
+function navbar() {
+    nav.hamburger.classList.toggle("active");
+    nav.navigation.classList.toggle("height-animation");
+}
+
+nav.hamburger.addEventListener("click", navbar);
+nav.navigation.addEventListener("click", navbar);
+
 
 // Adaptability Navigation
-let navbarLinkActive;
 const navlinks = document.querySelectorAll("nav .nav-links ul li a");
+let navbarLinkActive;
 
-// Element Variable
-const home = document.getElementById("home");
-const about = document.getElementById("about");
-const projects = document.getElementById("projects")
+// Element Object
+const section = {
+    home: document.getElementById("home"),
+    about: document.getElementById("about"),
+    projects: document.getElementById("projects"),
+    contact: document.getElementById("contact")
+}
 
 
 function removeClass(element) {
     if (navbarLinkActive) {
         const temp = navbarLinkActive?.getAttribute("href").split("#")[1];
+
+        // in case you wondering what the uses of ? in code above
+        // the ? symbol usage is if this properties or method is available run it.
+        // the ? symbol is used too to pass some error like there is case where the element doesnt have this method
+        // becouse it is either undefined or null then this will help you pass it
+
         if (!(temp === element)) {
             navbarLinkActive.classList.remove("active");
         }
@@ -46,29 +59,26 @@ function addClass(target) {
 
 document.addEventListener("scroll", function () {
     const clientLocation = document.querySelector("html").scrollTop;
-    if (clientLocation >= home.offsetTop && clientLocation <= about.offsetTop - 200) {
+    if (clientLocation >= section.home.offsetTop && clientLocation <= section.about.offsetTop - 200) {
         addClass(home);
-    } else if (clientLocation > about.offsetTop - 100 && clientLocation < projects.offsetTop - 300) {
+    } else if (clientLocation > section.about.offsetTop - 100 && clientLocation < section.projects.offsetTop - 300) {
         addClass(about);
-    } else if (clientLocation > projects.offsetTop - 300) {
+    } else if (clientLocation > section.projects.offsetTop - 300) {
         addClass(projects);
     }
-
-    console.log(about.offsetTop);
-    console.log(projects.offsetTop);
 })
-
 addClass(home);
 
 
 // Skills Function
-
-const icons = document.getElementsByClassName("skills-icon")[0];
-const details = document.querySelectorAll(".skills .details > div");
-const container = document.querySelector(".skills .details");
+const elements = {
+    icons: document.getElementsByClassName("skills-icon")[0],
+    details: document.querySelectorAll(".skills .details > div"),
+    container: document.querySelector(".skills .details")
+}
 let activated;
 
-function deleteText() {
+function deleteText() { // function to text if there is element has dis-flex class
     setTimeout(() => {
         activated = document.getElementsByClassName("dis-flex")[0];
         if (activated) {
@@ -79,7 +89,7 @@ function deleteText() {
     }, 100);
 }
 
-function removeClassList(element) {
+function removeClassList(element) { // function to delete element class that passed by
     activated = document.getElementsByClassName("dis-flex")[0];
     if (activated) {
         setTimeout(() => {
@@ -92,15 +102,15 @@ function removeClassList(element) {
     classAdd(element);
 }
 
-function notification() {
-    if (container.scrollHeight > container.clientHeight) {
+function notification() { // Function to know if the element is scrollable
+    if (elements.container.scrollHeight > elements.container.clientHeight) {
         document.querySelector(".skills .notification").classList.add("visibility");
     } else {
         document.querySelector(".skills .notification").classList.remove("visibility");
     }
 }
 
-function classAdd(element) {
+function classAdd(element) { // function to add class to element that passed by
     element.classList.add("dis-flex");
     setTimeout(() => {
         element.classList.add("opacity");
@@ -109,10 +119,11 @@ function classAdd(element) {
     notification();
 }
 
-icons.addEventListener("click", (event) => {
-    details.forEach((el) => {
+elements.icons.addEventListener("click", (event) => {
+    elements.details.forEach((el) => {
         if (event.target.getAttribute("skills") === el.classList[0]) {
             removeClassList(el);
+            return;
         }
     })
 })
