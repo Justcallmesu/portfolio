@@ -60,11 +60,13 @@ function addClass(target) {
 document.addEventListener("scroll", function () {
     const clientLocation = document.querySelector("html").scrollTop;
     if (clientLocation >= section.home.offsetTop && clientLocation <= section.about.offsetTop - 200) {
-        addClass(home);
+        addClass(section.home);
     } else if (clientLocation > section.about.offsetTop - 100 && clientLocation < section.projects.offsetTop - 300) {
-        addClass(about);
-    } else if (clientLocation > section.projects.offsetTop - 300) {
-        addClass(projects);
+        addClass(section.about);
+    } else if (clientLocation > section.projects.offsetTop - 300 && clientLocation < section.contact.offsetTop - 300) {
+        addClass(section.projects);
+    } else if (clientLocation > section.contact.offsetTop - 300) {
+        addClass(section.contact)
     }
 })
 addClass(home);
@@ -127,3 +129,155 @@ elements.icons.addEventListener("click", (event) => {
         }
     })
 })
+
+// Javascript Validation
+const input = document.querySelectorAll("#contact .input");
+const submit = document.getElementById("submit");
+const errorList = document.querySelector("#contact .error ul");
+const success = document.querySelector("#contact .success");
+// Array To store Error
+const error = [];
+let errorElements;
+
+// Regex
+const regex = {
+    fullname: /^[a-zA-Z\s]*$/i,
+    email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i
+}
+
+const node = {
+    list: null,
+    paragraph: null,
+    text: null
+}
+
+function removeElement(clear) {
+    errorElements.forEach((el) => {
+        el.remove();
+    });
+
+    if (clear) {
+        errorList.parentNode.classList.remove("dis-block");
+    }
+}
+
+function createNode(el) {
+    node.paragraph = document.createElement("p");
+    node.list = document.createElement("li");
+    node.text = document.createTextNode(el);
+
+    node.paragraph.appendChild(node.text);
+    node.list.appendChild(node.paragraph);
+
+    node.list.classList.add("errorView")
+    errorList.appendChild(node.list);
+}
+
+function emptyForm(el) {
+    if (el.getAttribute("name") === "fullname") {
+        error.push("Are you nameless ?");
+    } else if (el.getAttribute("name") === "email") {
+        error.push("but.. but... we need your email");
+    } else {
+        error.push("ah yes secret message is the empty message");
+    }
+}
+
+function validate(el) {
+    if (el.getAttribute("name") === "fullname") {
+        if (!regex.fullname.test(el.value)) {
+            error.push("What kind of name is that are you a robot ?")
+        }
+    } else if (el.getAttribute("name") === "email") {
+        if (!regex.email.test(el.value)) {
+            error.push("To be honest that email isnt valid");
+        }
+    }
+}
+
+function successNotification() {
+    success.classList.add("dis-block");
+    input.forEach((el) => {
+        el.value = "";
+    })
+    setTimeout(() => success.classList.remove("dis-block"), 5000);
+}
+
+function createElement(error) {
+    if (errorElements) {
+        removeElement();
+    }
+
+    if (typeof error === "object") {
+        error.forEach((el) => {
+            createNode(el);
+        })
+    } else {
+        createNode(error);
+    }
+    errorList.parentNode.classList.add("dis-block");
+}
+
+
+function checkError() {
+    errorElements = document.querySelectorAll(".errorView");
+    if (errorElements.length < 2) {
+        errorElements.forEach((el, index) => {
+            if (!(el.innerText === error[index])) {
+                createElement(error[index]);
+                return;
+            }
+        })
+    }
+    createElement(error);
+}
+
+function sendEmail() {
+    errorElements = document.querySelectorAll(".errorView");
+    const data = {
+        from: input[0].value,
+        email: input[1].value,
+        body: input[2].value
+    }
+    if (errorElements) {
+        removeElement(true);
+    }
+    Email.send({
+        SecureToken: "737676e0-8430-4825-b15c-26258f2cb31b",
+        To: 'winatardisuwanto@gmail.com',
+        From: `winatardisuwanto@gmail.com`,
+        Subject: "Someone send you email from your Portofolio !",
+        Body: `Email : ${data.email} <br/>
+        Dear Su, ${data.body}`
+    }).then((message) => {
+        message === "OK" ? successNotification() : createElement(message)
+    });
+}
+
+
+function validation(event) {
+    event.preventDefault();
+    console.log(this);
+    event.stopPropagation();
+
+    if (error.length) {
+        error.length = 0;
+    }
+    input.forEach((el) => {
+        if (!el.value) {
+            emptyForm(el)
+            return;
+        }
+        if (el.value) {
+            validate(el);
+            return;
+        }
+    });
+    if (error.length) {
+        checkError();
+        return;
+    }
+    sendEmail();
+};
+
+submit.addEventListener("click", validation)
