@@ -131,10 +131,12 @@ elements.icons.addEventListener("click", (event) => {
 })
 
 // Javascript Validation
-const input = document.querySelectorAll("#contact .input");
-const submit = document.getElementById("submit");
-const errorList = document.querySelector("#contact .error ul");
-const success = document.querySelector("#contact .success");
+const formElements = {
+    input: document.querySelectorAll("#contact .input"),
+    submit: document.getElementById("submit"),
+    errorList: document.querySelector("#contact .error ul"),
+    errorElement: document.querySelector("#contact .success")
+}
 // Array To store Error
 const error = [];
 let errorElements;
@@ -157,7 +159,7 @@ function removeElement(clear) {
     });
 
     if (clear) {
-        errorList.parentNode.classList.remove("dis-block");
+        formElements.errorList.parentNode.classList.remove("dis-block");
     }
 }
 
@@ -170,7 +172,7 @@ function createNode(el) {
     node.list.appendChild(node.paragraph);
 
     node.list.classList.add("errorView")
-    errorList.appendChild(node.list);
+    formElements.errorList.appendChild(node.list);
 }
 
 function emptyForm(el) {
@@ -196,11 +198,11 @@ function validate(el) {
 }
 
 function successNotification() {
-    success.classList.add("dis-block");
-    input.forEach((el) => {
+    formElements.success.classList.add("dis-block");
+    formElements.input.forEach((el) => {
         el.value = "";
     })
-    setTimeout(() => success.classList.remove("dis-block"), 5000);
+    setTimeout(() => formElements.success.classList.remove("dis-block"), 5000);
 }
 
 function createElement(error) {
@@ -215,7 +217,7 @@ function createElement(error) {
     } else {
         createNode(error);
     }
-    errorList.parentNode.classList.add("dis-block");
+    formElements.errorList.parentNode.classList.add("dis-block");
 }
 
 
@@ -235,9 +237,9 @@ function checkError() {
 function sendEmail() {
     errorElements = document.querySelectorAll(".errorView");
     const data = {
-        from: input[0].value,
-        email: input[1].value,
-        body: input[2].value
+        from: formElements.input[0].value,
+        email: formElements.input[1].value,
+        body: formElements.input[2].value
     }
     if (errorElements) {
         removeElement(true);
@@ -257,13 +259,12 @@ function sendEmail() {
 
 function validation(event) {
     event.preventDefault();
-    console.log(this);
     event.stopPropagation();
 
     if (error.length) {
         error.length = 0;
     }
-    input.forEach((el) => {
+    formElements.input.forEach((el) => {
         if (!el.value) {
             emptyForm(el)
             return;
@@ -280,4 +281,4 @@ function validation(event) {
     sendEmail();
 };
 
-submit.addEventListener("click", validation)
+formElements.submit.addEventListener("click", validation)
