@@ -135,8 +135,9 @@ const formElements = {
     input: document.querySelectorAll("#contact .input"),
     submit: document.getElementById("submit"),
     errorList: document.querySelector("#contact .error ul"),
-    errorElement: document.querySelector("#contact .success")
+    success: document.querySelector("#contact .success"),
 }
+
 // Array To store Error
 const error = [];
 let errorElements;
@@ -157,7 +158,6 @@ function removeElement(clear) {
     errorElements.forEach((el) => {
         el.remove();
     });
-
     if (clear) {
         formElements.errorList.parentNode.classList.remove("dis-block");
     }
